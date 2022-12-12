@@ -1,0 +1,19 @@
+<resources>
+    <!-- Application Text -->
+    <string name="app_name">Todo-List-Application</string>
+
+    <!-- ACTIVITY_MAIN TEXT -->
+    <string name="btn_text">+ New Task</string>
+
+    <!-- FRAGMENT_NEW_TASK TEXT-->
+    <string name="app_newTask">New Task</string>
+    <string name="txt_name">Task Name</string>
+    <string name="txt_description">Task Description</string>
+    <string name="btn_select">Select Time</string>
+    <string name="btn_save">Save</string>
+
+    <!-- FRAGMENT_NEW_TASK TEXT-->
+    <string name="place_holder">Place Holder</string>
+    <string name="checkbox">CheckBox</string>
+
+</resources>
