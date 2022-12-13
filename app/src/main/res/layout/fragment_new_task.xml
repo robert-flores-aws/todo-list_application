@@ -50,13 +50,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/timePickerButton"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_TimePicker"
         style="@style/btn_fragmentStyle"
         android:layout_marginHorizontal="20dp"
         android:text="@string/btn_select"/>
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_Save"
         style="@style/btn_fragmentStyle"
         android:layout_marginHorizontal="20dp"
