@@ -2,40 +2,36 @@ package com.example.todo_list_application
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.UUID
 
-class TaskViewModel: ViewModel() {
-    var taskItem = MutableLiveData<MutableList<TaskItem>>()
+class TaskViewModel(private val repository: TaskItemRepository): ViewModel() {
+    var taskItem: LiveData<List<TaskItem>> = repository.allTaskItems.asLiveData()
 
-    init {
-        taskItem.value = mutableListOf()
+    fun addTaskItem(newTask: TaskItem) = viewModelScope.launch {
+        repository.insertTaskItem(newTask)
     }
 
-    fun addTaskItem(newTask: TaskItem){
-        val list = taskItem.value
-        list!!.add(newTask)
-        taskItem.postValue(list)
-    }
-
-    fun updateTaskItem(id: UUID, name: String, desc: String, dueTime: LocalTime?){
-        val list = taskItem.value
-        val task = list!!.find { it.id == id }!!
-        task.name = name
-        task.desc = desc
-        task.dueTime = dueTime
-        taskItem.postValue(list)
+    fun updateTaskItem(taskItem: TaskItem) = viewModelScope.launch {
+        repository.updateTaskItem(taskItem)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun setCompleted(taskValue: TaskItem){
-        val list = taskItem.value
-        val task = list!!.find { it.id == taskValue.id }!!
-        if (task.completedDate == null)
-            task.completedDate = LocalDate.now()
-        taskItem.postValue(list)
+    fun setCompleted(taskItem: TaskItem) = viewModelScope.launch {
+        if (!taskItem.isCompleted())
+            taskItem.completedDateString = TaskItem.dateFormatter.format(LocalDate.now())
+        repository.updateTaskItem(taskItem)
+    }
+}
+
+class TaskItemModelFactory(private val repository: TaskItemRepository): ViewModelProvider.Factory{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(TaskViewModel::class.java))
+            return TaskViewModel(repository) as T
+
+        throw java.lang.IllegalArgumentException("Unknown Class for View Model")
     }
 }

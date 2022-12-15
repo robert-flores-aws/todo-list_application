@@ -54,7 +54,9 @@
         android:id="@+id/btn_TimePicker"
         style="@style/btn_fragmentStyle"
         android:layout_marginHorizontal="20dp"
-        android:text="@string/btn_select"/>
+        android:text="@string/btn_select"
+        android:background="@color/white"
+        android:textColor="#0077B6"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_Save"
