@@ -20,7 +20,6 @@ class Fragment_NewTask(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
     private lateinit var taskViewModel: TaskViewModel
     private var dueTime: LocalTime? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = requireActivity()
@@ -45,7 +44,6 @@ class Fragment_NewTask(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun openTimePicker() {
         if (dueTime == null)
             dueTime = LocalTime.now()
@@ -58,7 +56,6 @@ class Fragment_NewTask(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
         dialog.show()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun updateTimeButtonText() {
         binding.btnTimePicker.text = String.format("%02d:%02d", dueTime!!.hour, dueTime!!.minute)
     }
@@ -68,14 +65,13 @@ class Fragment_NewTask(var taskItem: TaskItem?) : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveAction(){
         val name = binding.name.text.toString()
         val desc = binding.desc.text.toString()
-        val dueTimeString = if (dueTime == null) null else TaskItem.dateFormatter.format(dueTime)
+        val dueTimeString = if (dueTime == null) null else TaskItem.timeFormatter.format(dueTime)
         if (taskItem == null){
-            val newtask = TaskItem(name, desc, dueTimeString, null)
-            taskViewModel.addTaskItem(newtask)
+            val newTask = TaskItem(name, desc, dueTimeString, null)
+            taskViewModel.addTaskItem(newTask)
         } else{
             taskItem!!.name = name
             taskItem!!.desc = desc

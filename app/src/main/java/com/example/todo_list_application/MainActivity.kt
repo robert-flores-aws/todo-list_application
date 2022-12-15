@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity(), taskClickEvent {
         Fragment_NewTask(taskItem).show(supportFragmentManager, "newTaskTag")
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun completeTaskItem(taskItem: TaskItem) {
         taskViewModel.setCompleted(taskItem)
     }

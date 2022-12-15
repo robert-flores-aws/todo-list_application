@@ -19,6 +19,4 @@ interface TaskItemDao {
     @Update
     suspend fun updateTaskItem(taskItem: TaskItem)
 
-    @Delete
-    suspend fun deleteTaskItem(taskItem: TaskItem)
 }

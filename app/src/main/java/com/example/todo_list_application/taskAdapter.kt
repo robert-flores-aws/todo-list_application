@@ -17,7 +17,6 @@ class taskAdapter(
         return taskViewHolder(parent.context, binding, clickEvent)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: taskViewHolder, position: Int) {
         holder.bindTaskItem(taskItems[position])
     }
